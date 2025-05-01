@@ -1,6 +1,6 @@
 # Drone2D-Avoidance
 
-A minimalist project where a **blue drone** must reach a **green goal** while dodging **red circular obstacles** in a 2‑D world.  
+Drone2D-Avoidance is a minimal reinforcement-learning playground where a **blue drone** learns to fly toward a **green goal** while avoiding **red obstacles** in a 2-D world.  
 The environment (`drone_2d_env.py`) is Gymnasium‑compatible and rendered with PyGame; training uses **PPO** from Stable‑Baselines 3.
 
 ---
@@ -22,7 +22,7 @@ python train.py
 ```
 * Logs stream to the console **and** TensorBoard (`ppo_drone_tb/`).  
 * Default hyper‑params  
-  `learning_rate=5e-4 · n_steps=1024 · ent_coef=0.01 · total_timesteps=1_000_000`
+  `learning_rate=3e-4 · n_steps=2048 · ent_coef=0 · total_timesteps=1_500_000`
 * View curves in your browser:
   ```bash
   tensorboard --logdir ppo_drone_tb
@@ -42,13 +42,13 @@ The script reloads the latest checkpoint, keeps the global timestep counter, and
 
 ## 4  Watch the agent
 ```bash
-python eval.py --episodes 10 --delay 0.05
+python eval.py --episodes 10 --delay 0.02
 
 # or point explicitly at files:
 python eval.py \
   --model train_logs/ppo_drone_model_continued.zip \
   --norm  train_logs/vec_normalize_continued.pkl \
-  --episodes 20 --delay 0.03
+  --episodes 20 --delay 0.02
 ```
 * A PyGame window opens; the blue dot moves in real time.  
 * Console prints results like  
@@ -80,11 +80,11 @@ Geometry tweaks work with an existing policy; a short fine‑tune (~20 k–50�
 | Dense shaping | `(old_dist − new_dist) × scale` (scale = 4 when far >40 px, else 2) |
 | Ring bonus | +1 every 3 px closer |
 | Wall repulsion | −0.05 / distance‑to‑nearest‑wall |
-| Flip penalty | −10 if >3 direction flips in last 6 steps |
+| Flip penalty | −15 if >3 direction flips in last 6 steps |
 | Loop penalty | −5 if same pixel occurs ≥8× in 20‑frame window |
-| Early‑stuck | −50 & truncate after 15 frames (<0.5 px progress) |
-| Slow progress | −20 & truncate if <4 px closer over last 25 frames |
-| Goal / Collision | +200  /  −200 |
+| Early‑stuck | −60 & truncate after 15 frames (<0.5 px progress) |
+| Slow progress | −120 & truncate if <4 px closer over last 25 frames |
+| Goal / Collision | +400  /  −200 |
 
 TensorBoard’s *rollout/ep_rew_mean* is the sum of all components per episode.
 
