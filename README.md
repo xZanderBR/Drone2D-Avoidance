@@ -10,7 +10,7 @@ The environment (`drone_2d_env.py`) is Gymnasium‑compatible and rendered with 
 # (optional) create & activate a virtual‑env …
 
 pip install -r requirements.txt
-# Gymnasium ‧ PyGame ‧ Stable‑Baselines3 ‧ PyTorch ‧ NumPy
+# Gymnasium ‧ PyGame ‧ Stable‑Baselines3 ‧ PyTorch ‧ NumPy ‧ TensorBoard
 ```
 *(If you’re on Apple‑silicon or GPU, install the matching PyTorch build first, then run the command above.)*
 

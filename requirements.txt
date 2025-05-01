@@ -3,3 +3,4 @@ pygame==2.6.1
 stable-baselines3==2.6.0
 torch==2.5.1
 numpy==2.2.4
+tensorboard==2.19.0
