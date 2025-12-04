@@ -1,6 +1,6 @@
 # Drone2D-Avoidance
 
-Drone2D-Avoidance is a minimal reinforcement-learning playground where a **blue drone** learns to fly toward a **green goal** while avoiding **red obstacles** in a 2-D world.  
+Drone2D-Avoidance is a reinforcement-learning playground where a **blue drone** learns to fly toward a **green goal** while avoiding **red obstacles** in a 2-D world.  
 The environment (`drone_2d_env.py`) is Gymnasium‑compatible and rendered with PyGame; training uses **PPO** from Stable‑Baselines 3.
 
 ---
